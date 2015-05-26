@@ -1,0 +1,28 @@
+// The ui-variables file is provided by base themes provided by Atom.
+//
+// See https://github.com/atom/atom-dark-ui/blob/master/styles/ui-variables.less
+// for a full listing of what's available.
+@import "ui-variables";
+
+.tab-bar .tab.new-tab {
+	flex-grow: 0;
+	min-width: 39px;
+
+	.title{
+		-webkit-mask: initial;
+	}
+
+	.icon::before{
+		margin-right: 0;
+	}
+
+	& + .new-tab {
+		position: fixed;
+		top: 0;
+		right: 0;
+		z-index: 999;
+		background: #eaeaeb;
+		min-width: 40px;
+		box-shadow: inset 0 -1px 0 #dadbdc;
+	}
+}

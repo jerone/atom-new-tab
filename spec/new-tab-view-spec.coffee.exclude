@@ -1,0 +1,5 @@
+NewTabView = require '../lib/new-tab-view'
+
+describe "NewTabView", ->
+  it "has one valid test", ->
+    expect("life").toBe "easy"
