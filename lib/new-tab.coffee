@@ -9,6 +9,16 @@ module.exports = NewTab =
   modalPanel: null
   subscriptions: null
 
+  config:
+    position:
+      type: 'string'
+      default: 'Right'
+      enum: ['Left', 'Right']
+    behavior:
+      type: 'string'
+      default: 'Both'
+      enum: ['Sticky', 'Overflow', 'Both']
+
   activate: (state) ->
     console.log 'new-tab.activate'
 
