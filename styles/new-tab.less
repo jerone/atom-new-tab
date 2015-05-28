@@ -4,27 +4,56 @@
 // for a full listing of what's available.
 @import "ui-variables";
 
-.tab-bar .tab.new-tab {
-	flex-grow: 0;
-	min-width: 40px;
-	z-index: 999;
-
-	&.active {
+.tab-bar {
+	.tab.new-tab {
 		flex-grow: 0;
+		min-width: 40px;
+		z-index: 999;
+
+		&.active {
+			flex-grow: 0;
+		}
+
+		&.new-tab-sticky {
+			position: absolute;
+			top: 0;
+			right: 0;
+			z-index: 998;
+		}
+
+		.title{
+			-webkit-mask: initial;
+		}
+
+		.icon::before{
+			margin-right: 0;
+		}
 	}
 
-	&.right {
-		position: absolute;
-		top: 0;
-		right: 0;
-		z-index: 998;
+	&.new-tab-left {
+		padding-left: 40px;
+		.tab.new-tab-sticky {
+			left: 0;
+			right: auto;
+		}
+		.tab.new-tab-inline {
+			display: none;
+		}
 	}
 
-	.title{
-		-webkit-mask: initial;
+	&.new-tab-center {
+		.tab.new-tab-sticky {
+			display: none;
+		}
 	}
 
-	.icon::before{
-		margin-right: 0;
+	&.new-tab-center-right {
+	}
+
+	&.new-tab-right {
+		padding-right: 40px;
+		.tab.new-tab-inline {
+			display: none;
+		}
 	}
 }

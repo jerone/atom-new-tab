@@ -1,5 +1,4 @@
 _ = require 'underscore-plus'
-{$, View}  = require 'atom-space-pen-views'
 {CompositeDisposable} = require 'atom'
 
 NewTabView = require './new-tab-view'
@@ -13,51 +12,49 @@ module.exports = NewTab =
     position:
       type: 'string'
       default: 'Right'
-      enum: ['Left', 'Right']
-    behavior:
-      type: 'string'
-      default: 'Both'
-      enum: ['Sticky', 'Overflow', 'Both']
+      enum: ['Left', 'Center', 'Center+Right', 'Right']
+      #TODO: Add none to hide;
 
   activate: (state) ->
     console.log 'new-tab.activate'
 
     @newTabViews = []
+    @subscriptions = new CompositeDisposable
 
-    @paneSubscription = atom.workspace.observePanes (pane) =>
-      newTabView = new NewTabView()
-      newTabViewRight = new NewTabView()
+    #FIXME Detect if tabs is active and tabs element is attached;
+    window.setTimeout =>
+      @paneSubscription = atom.workspace.observePanes (pane) =>
+        newTabViewInline = new NewTabView()
+        newTabViewSticky = new NewTabView()
 
-      paneElement = atom.views.getView(pane)
+        paneElement = atom.views.getView(pane)
 
-      window.setTimeout =>
-        newTabView.initialize(pane)
-        newTabViewRight.initialize(pane, alignRight: true)
+        newTabViewInline.initialize(pane)
+        newTabViewSticky.initialize(pane)
+
+        newTabViewInline.classList.add('new-tab-inline')
+        newTabViewSticky.classList.add('new-tab-sticky')
 
         tabBarElement = paneElement.firstChild
-        tabBarElement.appendChild(newTabView)
-        tabBarElement.appendChild(newTabViewRight)
 
-        @newTabViews.push(newTabView, newTabViewRight)
+        tabBarElement.insertBefore(newTabViewSticky, tabBarElement.firstChild)
+        tabBarElement.appendChild(newTabViewInline)
+
+        @subscriptions.add atom.config.observe 'new-tab.position', (position) =>
+          tabBarElement.classList.remove('new-tab-left', 'new-tab-center', 'new-tab-center-right', 'new-tab-right')
+          positionClass = position.toLowerCase().replace('+', '-')
+          tabBarElement.classList.add("new-tab-#{positionClass}")
+
+        @newTabViews.push(newTabViewInline, newTabViewSticky)
         pane.onDidDestroy =>
-          _.remove(@newTabViews, newTabView)
-          _.remove(@newTabViews, newTabViewRight)
+          _.remove(@newTabViews, newTabViewInline)
+          _.remove(@newTabViews, newTabViewSticky)
       , 100
-
-    #@subscriptions = new CompositeDisposable
-    #@subscriptions.add atom.commands.add 'atom-workspace', 'new-tab:toggle': => @toggle()
 
   deactivate: ->
     @paneSubscription.dispose()
+    @subscriptions?.dispose()
     newTabView.destroy() for newTabView in @newTabViews
 
   serialize: ->
     #newTabViewState: @newTabView.serialize()
-
-  toggle: ->
-    console.log 'NewTab was toggled!'
-
-    #if @modalPanel.isVisible()
-    #  @modalPanel.hide()
-    #else
-    #  @modalPanel.show()

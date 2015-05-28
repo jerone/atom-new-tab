@@ -3,9 +3,8 @@ _ = require 'underscore-plus'
 
 module.exports =
 class NewTabView extends HTMLElement
-  initialize: (@pane, {alignRight}={}) ->
+  initialize: (@pane) ->
     @classList.add('tab', 'new-tab')
-    @classList.add('right') if alignRight?
 
     itemTitle = document.createElement('div')
     itemTitle.classList.add('title')
@@ -29,6 +28,9 @@ class NewTabView extends HTMLElement
     @_attachDummyPaneItem()
     @_attachDummyEvents()
 
+  destroy: ->
+    @remove()
+
   _attachDummyPaneItem: ->
     @item = new DummyView('')
 
@@ -44,9 +46,6 @@ class NewTabView extends HTMLElement
     @getTabs = -> console.log 'new-tab.getTabs', arguments
     @updateIconVisibility = -> console.log 'new-tab.updateIconVisibility', arguments
     @updateModifiedStatus = -> console.log 'new-tab.updateModifiedStatus', arguments
-
-  destroy: ->
-    @remove()
 
 module.exports = document.registerElement('tabs-new-tab', prototype: NewTabView.prototype, extends: 'li')
 
