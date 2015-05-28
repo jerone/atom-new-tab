@@ -6,7 +6,19 @@
 
 .tab-bar .tab.new-tab {
 	flex-grow: 0;
-	min-width: 39px;
+	min-width: 40px;
+	z-index: 999;
+
+	&.active {
+		flex-grow: 0;
+	}
+
+	&.right {
+		position: absolute;
+		top: 0;
+		right: 0;
+		z-index: 998;
+	}
 
 	.title{
 		-webkit-mask: initial;
@@ -14,15 +26,5 @@
 
 	.icon::before{
 		margin-right: 0;
-	}
-
-	& + .new-tab {
-		position: fixed;
-		top: 0;
-		right: 0;
-		z-index: 999;
-		background: #eaeaeb;
-		min-width: 40px;
-		box-shadow: inset 0 -1px 0 #dadbdc;
 	}
 }
