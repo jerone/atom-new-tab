@@ -40,7 +40,7 @@ module.exports = NewTab =
         tabBarElement.insertBefore(newTabViewSticky, tabBarElement.firstChild)
         tabBarElement.appendChild(newTabViewInline)
 
-        @subscriptions.add atom.config.observe 'new-tab.position', (position) =>
+        @subscriptions.add atom.config.observe 'new-tab.position', (position) ->
           tabBarElement.classList.remove('new-tab-left', 'new-tab-center', 'new-tab-center-right', 'new-tab-right')
           positionClass = position.toLowerCase().replace('+', '-')
           tabBarElement.classList.add("new-tab-#{positionClass}")

@@ -57,7 +57,7 @@ class DummyView extends View
   getTitle: -> null
   getLongTitle: -> null
   getIconName: -> null
-  serialize: -> { deserializer: 'DummyView' }
+  serialize: -> deserializer: 'DummyView'
   onDidChangeTitle: (callback) ->
     @titleCallbacks ?= []
     @titleCallbacks.push(callback)
