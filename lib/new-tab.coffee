@@ -12,8 +12,7 @@ module.exports = NewTab =
     position:
       type: 'string'
       default: 'Right'
-      enum: ['Left', 'Center', 'Center+Right', 'Right']
-      #TODO: Add none to hide;
+      enum: ['None', 'Left', 'Center', 'Center+Right', 'Right']
 
   activate: (state) ->
     console.log 'new-tab.activate'
@@ -40,11 +39,11 @@ module.exports = NewTab =
         tabBarElement.insertBefore(newTabViewSticky, tabBarElement.firstChild)
         tabBarElement.appendChild(newTabViewInline)
 
+        tabBarElement.classList.add('new-tab-none')
         @subscriptions.add atom.config.observe 'new-tab.position', (position) ->
           for schemaPosition in atom.config.getSchema('new-tab.position').enum
             schemaPositionClass = schemaPosition.toLowerCase().replace('+', '-')
             tabBarElement.classList.remove("new-tab-#{schemaPositionClass}")
-
           positionClass = position.toLowerCase().replace('+', '-')
           tabBarElement.classList.add("new-tab-#{positionClass}")
 
