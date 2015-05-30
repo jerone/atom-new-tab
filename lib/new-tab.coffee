@@ -21,8 +21,8 @@ module.exports = NewTab =
     @newTabViews = []
     @subscriptions = new CompositeDisposable
 
-    #FIXME Detect if tabs is active and tabs element is attached;
-    window.setTimeout =>
+    atom.packages.activatePackage('tabs').then (pkg) =>
+      console.log('new-tab.activate.activatePackage', arguments)
       @paneSubscription = atom.workspace.observePanes (pane) =>
         newTabViewInline = new NewTabView()
         newTabViewSticky = new NewTabView()
@@ -49,7 +49,6 @@ module.exports = NewTab =
         pane.onDidDestroy =>
           _.remove(@newTabViews, newTabViewInline)
           _.remove(@newTabViews, newTabViewSticky)
-      , 100
 
   deactivate: ->
     @paneSubscription.dispose()
