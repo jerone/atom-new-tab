@@ -15,9 +15,9 @@ class NewTabView extends HTMLElement
     itemTitle.appendChild(itemTitleIcon)
 
     @addEventListener 'mouseover', =>
-      @classList.add 'active'
+      @classList.add('active')
     @addEventListener 'mouseout', =>
-      @classList.remove 'active'
+      @classList.remove('active')
     @addEventListener 'mousedown', (e) =>
       console.log 'new-tab.initialize.mousedown', arguments
       atom.commands.dispatch(atom.views.getView(@pane), 'application:new-file')
@@ -49,7 +49,6 @@ class NewTabView extends HTMLElement
 
 module.exports = document.registerElement('tabs-new-tab', prototype: NewTabView.prototype, extends: 'li')
 
-
 class DummyView extends View
   @deserialize: -> new DummyView()
   @content: -> @div ''
@@ -58,17 +57,8 @@ class DummyView extends View
   getLongTitle: -> null
   getIconName: -> null
   serialize: -> deserializer: 'DummyView'
-  onDidChangeTitle: (callback) ->
-    @titleCallbacks ?= []
-    @titleCallbacks.push(callback)
-    dispose: => _.remove(@titleCallbacks, callback)
+  onDidChangeTitle: -> dispose: ->
   emitTitleChanged: ->
-    callback() for callback in @titleCallbacks ? []
-  onDidChangeIcon: (callback) ->
-    @iconCallbacks ?= []
-    @iconCallbacks.push(callback)
-    dispose: => _.remove(@iconCallbacks, callback)
+  onDidChangeIcon: -> dispose: ->
   emitIconChanged: ->
-    callback() for callback in @iconCallbacks ? []
-  onDidChangeModified: -> # to suppress deprecation warning
-    dispose: ->
+  onDidChangeModified: -> dispose: ->
