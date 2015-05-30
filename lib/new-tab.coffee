@@ -41,7 +41,10 @@ module.exports = NewTab =
         tabBarElement.appendChild(newTabViewInline)
 
         @subscriptions.add atom.config.observe 'new-tab.position', (position) ->
-          tabBarElement.classList.remove('new-tab-left', 'new-tab-center', 'new-tab-center-right', 'new-tab-right')
+          for schemaPosition in atom.config.getSchema('new-tab.position').enum
+            schemaPositionClass = schemaPosition.toLowerCase().replace('+', '-')
+            tabBarElement.classList.remove("new-tab-#{schemaPositionClass}")
+
           positionClass = position.toLowerCase().replace('+', '-')
           tabBarElement.classList.add("new-tab-#{positionClass}")
 
