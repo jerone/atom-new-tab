@@ -1,5 +1,7 @@
 # [atom-new-tab](https://github.com/jerone/atom-new-tab)
 
+[![Join the chat at https://gitter.im/jerone/atom-new-tab](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jerone/atom-new-tab?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![GitHub Release](https://img.shields.io/github/release/jerone/atom-new-tab.svg)](https://github.com/jerone/atom-new-tab/releases)
 [![Atom.io](https://img.shields.io/apm/v/new-tab.svg)](https://atom.io/packages/new-tab)
 [![Dependency Status](https://david-dm.org/jerone/atom-new-tab.svg?theme=shields.io)](https://david-dm.org/jerone/atom-new-tab)
