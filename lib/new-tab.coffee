@@ -40,8 +40,8 @@ module.exports = NewTab =
         tabBarElement.appendChild(newTabViewInline)
 
         tabBarElement.classList.add('new-tab-none')
-        @subscriptions.add atom.config.observe 'new-tab.position', (position) ->
-          for schemaPosition in atom.config.getSchema('new-tab.position').enum
+        @subscriptions.add atom.config.observe 'new-tab.position', (position) =>
+          for schemaPosition in @config.position.enum
             schemaPositionClass = schemaPosition.toLowerCase().replace('+', '-')
             tabBarElement.classList.remove("new-tab-#{schemaPositionClass}")
           positionClass = position.toLowerCase().replace('+', '-')
