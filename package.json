@@ -1,7 +1,7 @@
 {
   "name": "new-tab",
   "main": "./lib/new-tab",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "New Tab is a button on the tab bar which easily creates a new file.",
   "keywords": [
     "tab",
