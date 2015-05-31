@@ -2,12 +2,30 @@
   "name": "new-tab",
   "main": "./lib/new-tab",
   "version": "0.0.0",
-  "description": "A short description of your package",
-  "keywords": [],
-  "repository": "https://github.com/atom/new-tab",
+  "description": "New Tab is a button on the tab bar which easily creates a new file.",
+  "keywords": [
+    "tab",
+    "tabs",
+    "tabbar",
+    "new tab",
+    "new file"
+  ],
+  "homepage": "https://github.com/jerone/atom-new-tab",
+  "author": {
+    "name": "Jeroen van Warmerdam",
+    "email": "jeronevw@hotmail.com",
+    "url": "https://github.com/jerone"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jerone/atom-new-tab.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jerone/atom-new-tab/issues"
+  },
   "license": "MIT",
   "engines": {
-    "atom": ">=0.174.0 <2.0.0"
+    "atom": ">=0.200.0 <2.0.0"
   },
   "dependencies": {
     "atom-space-pen-views": "^2.0.5",
@@ -15,5 +33,6 @@
   },
   "devDependencies": {
     "coffeelint": "^1.9.7"
-  }
+  },
+  "private": true
 }
