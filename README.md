@@ -6,7 +6,7 @@
 [![License](http://img.shields.io/github/license/jerone/atom-new-tab.svg)](https://github.com/jerone/atom-new-tab/blob/master/LICENSE.md)
 [![Gitter chat](https://img.shields.io/badge/gitter-online-brightgreen.svg)](https://gitter.im/jerone/atom-new-tab)
 
-[New Tab](https://atom.io/packages/atom-new-tab) is a button on the tab bar which easily creates a new file.
+[New Tab](https://atom.io/packages/new-tab) is a button on the tab bar which easily creates a new file.
 
 ![New Tab screenshot](https://raw.githubusercontent.com/jerone/atom-new-tab/master/screenshot.gif)
 
