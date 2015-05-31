@@ -20,10 +20,13 @@ class NewTabView extends HTMLElement
       @classList.remove('active')
     @addEventListener 'mousedown', (e) =>
       console.log 'new-tab.initialize.mousedown', arguments
-      atom.commands.dispatch(atom.views.getView(@pane), 'application:new-file')
-      e.preventDefault()
-      e.stopPropagation()
-      return false
+      if e.which is 1
+        atom.commands.dispatch(atom.views.getView(@pane), 'application:new-file')
+        e.stopPropagation()
+        false
+      else if e.which is 2
+        e.stopPropagation()
+        false
 
     @_attachDummyPaneItem()
     @_attachDummyEvents()
