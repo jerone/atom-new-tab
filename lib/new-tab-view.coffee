@@ -1,6 +1,3 @@
-_ = require 'underscore-plus'
-{$, View}  = require 'atom-space-pen-views'
-
 module.exports =
 class NewTabView extends HTMLElement
   initialize: (@pane) ->
@@ -19,7 +16,6 @@ class NewTabView extends HTMLElement
     @addEventListener 'mouseout', =>
       @classList.remove('active')
     @addEventListener 'mousedown', (e) =>
-      console.log 'new-tab.initialize.mousedown', arguments
       if e.which is 1
         atom.commands.dispatch(atom.views.getView(@pane), 'application:new-file')
         e.stopPropagation()
@@ -28,40 +24,20 @@ class NewTabView extends HTMLElement
         e.stopPropagation()
         false
 
-    @_attachDummyPaneItem()
-    @_attachDummyEvents()
-
-  destroy: ->
-    @remove()
-
-  _attachDummyPaneItem: ->
+    DummyView = require './dummy-view'
     @item = new DummyView('')
+    this
 
-  _attachDummyEvents: ->
-    @handleEvents = -> console.log 'new-tab.handleEvents', arguments
-    @updateDataAttributes = -> console.log 'new-tab.updateDataAttributes', arguments
-    @updateTitle = -> #console.log 'new-tab.updateTitle', arguments
-    @updateIcon = -> console.log 'new-tab.updateIcon', arguments
-    @updateModifiedStatus = -> console.log 'new-tab.updateModifiedStatus', arguments
-    @setupTooltip = -> console.log 'new-tab.setupTooltip', arguments
-    @destroyTooltip = -> console.log 'new-tab.destroyTooltip', arguments
-    @destroy = -> console.log 'new-tab.destroy', arguments
-    @getTabs = -> console.log 'new-tab.getTabs', arguments
-    @updateIconVisibility = -> console.log 'new-tab.updateIconVisibility', arguments
-    @updateModifiedStatus = -> console.log 'new-tab.updateModifiedStatus', arguments
+  handleEvents: ->
+  updateDataAttributes: ->
+  updateTitle: ->
+  updateIcon: ->
+  updateModifiedStatus: ->
+  setupTooltip: ->
+  destroy: -> @remove()
+  destroyTooltip: ->
+  getTabs: ->
+  updateIconVisibility: ->
+  updateModifiedStatus: ->
 
 module.exports = document.registerElement('tabs-new-tab', prototype: NewTabView.prototype, extends: 'li')
-
-class DummyView extends View
-  @deserialize: -> new DummyView()
-  @content: -> @div ''
-  initialize: ->
-  getTitle: -> null
-  getLongTitle: -> null
-  getIconName: -> null
-  serialize: -> deserializer: 'DummyView'
-  onDidChangeTitle: -> dispose: ->
-  emitTitleChanged: ->
-  onDidChangeIcon: -> dispose: ->
-  emitIconChanged: ->
-  onDidChangeModified: -> dispose: ->

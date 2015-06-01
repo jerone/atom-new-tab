@@ -1,13 +1,12 @@
-_ = require 'underscore-plus'
 {CompositeDisposable} = require 'atom'
 
 NewTabView = require './new-tab-view'
+TabBarView = require './tab-bar-view'
+
+positionToClass = (position) ->
+  'new-tab-' + position.toLowerCase().replace('+', '-')
 
 module.exports = NewTab =
-  newTabView: null
-  modalPanel: null
-  subscriptions: null
-
   config:
     position:
       type: 'string'
@@ -15,47 +14,35 @@ module.exports = NewTab =
       enum: ['None', 'Left', 'Center', 'Center+Right', 'Right']
 
   activate: (state) ->
-    console.log 'new-tab.activate'
-
-    @newTabViews = []
-    @subscriptions = new CompositeDisposable
-
     atom.packages.activatePackage('tabs').then (pkg) =>
-      console.log('new-tab.activate.activatePackage', arguments)
+      @tabBarViews = []
+      @subscriptions = new CompositeDisposable
       @paneSubscription = atom.workspace.observePanes (pane) =>
-        newTabViewInline = new NewTabView()
-        newTabViewSticky = new NewTabView()
+        @tabBarViews.push tabBarView = new TabBarView(pane)
 
-        paneElement = atom.views.getView(pane)
-
-        newTabViewInline.initialize(pane)
-        newTabViewSticky.initialize(pane)
+        newTabViewInline = new NewTabView().initialize(pane)
+        newTabViewSticky = new NewTabView().initialize(pane)
 
         newTabViewInline.classList.add('new-tab-inline')
         newTabViewSticky.classList.add('new-tab-sticky')
 
-        tabBarElement = paneElement.firstChild
+        tabBarView.prepend(newTabViewSticky)
+        tabBarView.append(newTabViewInline)
 
-        tabBarElement.insertBefore(newTabViewSticky, tabBarElement.firstChild)
-        tabBarElement.appendChild(newTabViewInline)
-
-        tabBarElement.classList.add('new-tab-none')
+        tabBarView.addClass(positionToClass('None'))
         @subscriptions.add atom.config.observe 'new-tab.position', (position) =>
           for schemaPosition in @config.position.enum
-            schemaPositionClass = schemaPosition.toLowerCase().replace('+', '-')
-            tabBarElement.classList.remove("new-tab-#{schemaPositionClass}")
-          positionClass = position.toLowerCase().replace('+', '-')
-          tabBarElement.classList.add("new-tab-#{positionClass}")
+            tabBarView.removeClass(positionToClass(schemaPosition))
+          tabBarView.addClass(positionToClass(position))
 
-        @newTabViews.push(newTabViewInline, newTabViewSticky)
         pane.onDidDestroy =>
-          _.remove(@newTabViews, newTabViewInline)
-          _.remove(@newTabViews, newTabViewSticky)
+          @tabBarViews.splice(@tabBarViews.indexOf(tabBarView), 1)
+          tabBarView.destroy()
 
   deactivate: ->
-    @paneSubscription.dispose()
+    @paneSubscription?.dispose()
     @subscriptions?.dispose()
-    newTabView.destroy() for newTabView in @newTabViews
+    tabBarView.destroy() for tabBarView in @tabBarViews if @tabBarViews?
+    @tabBarViews = []
 
   serialize: ->
-    #newTabViewState: @newTabView.serialize()
