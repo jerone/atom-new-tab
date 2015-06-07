@@ -1,5 +1,6 @@
 ## vNext
 * :bug: Fix waiting for activating tabs package;
+* :bug: Better theme support;
 
 ## v0.2.0
 * :art::fire: Big clean up;

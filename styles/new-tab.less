@@ -1,66 +1,81 @@
-// The ui-variables file is provided by base themes provided by Atom.
-//
-// See https://github.com/atom/atom-dark-ui/blob/master/styles/ui-variables.less
-// for a full listing of what's available.
-@import "ui-variables";
-
 .tab-bar {
 	.tab.new-tab {
 		flex-grow: 0;
-		min-width: 40px;
-		z-index: 999;
+		z-index: 0;
 
 		&.active {
 			flex-grow: 0;
+			z-index: 0;
 		}
 
 		&.new-tab-sticky {
 			position: absolute;
-			top: 0;
 			right: 0;
-			z-index: 998;
 		}
 
-		.title{
+		.title {
 			-webkit-mask: initial;
-		}
-
-		.icon::before{
-			margin-right: 0;
 		}
 	}
 
 	&.new-tab-none {
-		.tab.new-tab.new-tab-sticky,
-		.tab.new-tab.new-tab-inline {
+		.tab.new-tab.new-tab-prepend,
+		.tab.new-tab.new-tab-append,
+		.tab.new-tab.new-tab-sticky {
 			display: none;
 		}
 	}
 
 	&.new-tab-left {
-		padding-left: 40px;
+		.tab.new-tab.new-tab-append,
 		.tab.new-tab.new-tab-sticky {
-			left: 0;
-			right: auto;
-		}
-		.tab.new-tab.new-tab-inline {
 			display: none;
 		}
 	}
 
 	&.new-tab-center {
+		.tab.new-tab.new-tab-prepend,
 		.tab.new-tab.new-tab-sticky {
 			display: none;
 		}
 	}
 
 	&.new-tab-center-right {
+		.tab.new-tab.new-tab-prepend {
+			display: none;
+		}
 	}
 
 	&.new-tab-right {
-		padding-right: 40px;
-		.tab.new-tab.new-tab-inline {
+		.tab.new-tab.new-tab-prepend {
 			display: none;
+		}
+		.tab.new-tab.new-tab-append {
+			visibility: hidden;
+		}
+	}
+}
+
+// Theme adjustments
+.theme-atom-dark-ui,
+.theme-atom-light-ui {
+	.tab-bar {
+		.tab.new-tab {
+			min-width: 15px;
+			width: 15px;
+			text-align: center;
+		}
+		.tab.new-tab.new-tab-sticky {
+			right: 10px;
+		}
+	}
+}
+.theme-one-dark-ui,
+.theme-one-light-ui {
+	.tab-bar {
+		.tab.new-tab {
+			min-width: 40px;
+			width: 40px;
 		}
 	}
 }

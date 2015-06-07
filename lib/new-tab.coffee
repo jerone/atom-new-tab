@@ -22,14 +22,17 @@ module.exports = NewTab =
       @paneSubscription = atom.workspace.observePanes (pane) =>
         @tabBarViews.push tabBarView = new TabBarView(pane)
 
-        newTabViewInline = new NewTabView().initialize(pane)
+        newTabViewPrepend = new NewTabView().initialize(pane)
+        newTabViewAppend = new NewTabView().initialize(pane)
         newTabViewSticky = new NewTabView().initialize(pane)
 
-        newTabViewInline.classList.add('new-tab-inline')
+        newTabViewPrepend.classList.add('new-tab-prepend')
+        newTabViewAppend.classList.add('new-tab-append')
         newTabViewSticky.classList.add('new-tab-sticky')
 
-        tabBarView.prepend(newTabViewSticky)
-        tabBarView.append(newTabViewInline)
+        tabBarView.prepend(newTabViewPrepend)
+        tabBarView.append(newTabViewAppend)
+        tabBarView.append(newTabViewSticky)
 
         tabBarView.addClass(positionToClass('None'))
         @subscriptions.add atom.config.observe 'new-tab.position', (position) =>
