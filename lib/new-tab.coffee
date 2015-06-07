@@ -14,7 +14,9 @@ module.exports = NewTab =
       enum: ['None', 'Left', 'Center', 'Center+Right', 'Right']
 
   activate: (state) ->
-    atom.packages.activatePackage('tabs').then (pkg) =>
+    atom.packages.onDidActivatePackage (pkg) =>
+      return unless pkg.name is 'tabs'
+
       @tabBarViews = []
       @subscriptions = new CompositeDisposable
       @paneSubscription = atom.workspace.observePanes (pane) =>
