@@ -32,12 +32,11 @@ class NewTabView extends HTMLElement
   updateDataAttributes: ->
   updateTitle: ->
   updateIcon: ->
+  updateIconVisibility: ->
   updateModifiedStatus: ->
   setupTooltip: ->
   destroy: -> @remove()
   destroyTooltip: ->
   getTabs: ->
-  updateIconVisibility: ->
-  updateModifiedStatus: ->
 
 module.exports = document.registerElement('tabs-new-tab', prototype: NewTabView.prototype, extends: 'li')
