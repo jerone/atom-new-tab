@@ -13,23 +13,22 @@ module.exports = NewTab =
       default: 'Right'
       enum: ['None', 'Left', 'Center', 'Center+Right', 'Right']
 
-  activate: (state) ->
+  activate: ->
     @tabBarViews = []
     @subscriptions = new CompositeDisposable
 
     if atom.packages.isPackageActive 'tabs'
-      @addNewTabToPane pane for pane in atom.workspace.getPanes()
+      @addNewTabToPane(pane) for pane in atom.workspace.getPanes()
 
-    atom.packages.onDidActivatePackage (pkg) =>
-      return unless pkg.name is 'tabs'
-      @paneSubscription = atom.workspace.observePanes (pane) =>
-        @addNewTabToPane pane
+    @subscriptions.add atom.packages.onDidActivatePackage ({name}) =>
+      return unless name is 'tabs'
+      @subscriptions.add atom.workspace.observePanes (pane) =>
+        @addNewTabToPane(pane)
 
   deactivate: ->
-    @paneSubscription?.dispose()
     @subscriptions?.dispose()
     tabBarView.destroy() for tabBarView in @tabBarViews if @tabBarViews?
-    @tabBarViews = []
+    @tabBarViews = null
 
   serialize: ->
 
@@ -48,12 +47,15 @@ module.exports = NewTab =
     tabBarView.append(newTabViewAppend)
     tabBarView.append(newTabViewSticky)
 
+    paneSubscriptions = new CompositeDisposable
+
     tabBarView.addClass(positionToClass('None'))
-    @subscriptions.add atom.config.observe 'new-tab.position', (position) =>
+    paneSubscriptions.add atom.config.observe 'new-tab.position', (position) =>
       for schemaPosition in @config.position.enum
         tabBarView.removeClass(positionToClass(schemaPosition))
       tabBarView.addClass(positionToClass(position))
 
-    pane.onDidDestroy =>
-      @tabBarViews.splice(@tabBarViews.indexOf(tabBarView), 1)
+    paneSubscriptions.add pane.onDidDestroy =>
+      @tabBarViews?.splice(@tabBarViews.indexOf(tabBarView), 1)
       tabBarView.destroy()
+      paneSubscriptions.dispose()
