@@ -1,3 +1,5 @@
+## vNext
+* :bug: Fix adding new tab when enabling package after Atom is already started;
 ## v0.3.0
 * :bug: Fix waiting for activating tabs package;
 * :bug: Better theme support;
