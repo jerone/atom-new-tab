@@ -1,5 +1,6 @@
 ## vNext
 * :bug: Fix adding new tab when enabling package after Atom is already started;
+* :bug: Fix style issue with Atom Material UI theme. Fixes https://github.com/jerone/atom-new-tab/issues/3;
 * :non-potable_water: Clean up memory leaks;
 
 ## v0.3.0
