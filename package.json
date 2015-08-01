@@ -1,7 +1,7 @@
 {
   "name": "new-tab",
   "main": "./lib/new-tab",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "New Tab is a button on the tab bar which easily creates a new file.",
   "keywords": [
     "tab",
@@ -25,7 +25,7 @@
   },
   "license": "MIT",
   "engines": {
-    "atom": ">=0.200.0 <2.0.0"
+    "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
     "atom-space-pen-views": "^2.0.5"
