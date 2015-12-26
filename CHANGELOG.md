@@ -1,3 +1,8 @@
+## v0.5.0
+* :bug: Fixed reordering issue. Fixes [#4](https://github.com/jerone/atom-new-tab/issues/4);
+* :bug: Fix style issue with Atom Material UI theme. Re-fixes [#3](https://github.com/jerone/atom-new-tab/issues/3);
+* :sparkles: Style fixes for Metro-UI;
+
 ## v0.4.1
 * :bug: Fix style issue with Atom Material UI theme. Re-fixes [#3](https://github.com/jerone/atom-new-tab/issues/3);
 
