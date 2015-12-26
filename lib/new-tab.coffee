@@ -43,7 +43,7 @@ module.exports = NewTab =
     newTabViewAppend.classList.add('new-tab-append')
     newTabViewSticky.classList.add('new-tab-sticky')
 
-    tabBarView.prepend(newTabViewPrepend)
+    tabBarView.append(newTabViewPrepend)
     tabBarView.append(newTabViewAppend)
     tabBarView.append(newTabViewSticky)
 

@@ -8,6 +8,11 @@
 			z-index: 0;
 		}
 
+		&.new-tab-prepend {
+			position: absolute;
+			left: 0;
+		}
+
 		&.new-tab-sticky {
 			position: absolute;
 			right: 0;
@@ -50,6 +55,7 @@
 		.tab.new-tab.new-tab-prepend {
 			display: none;
 		}
+
 		.tab.new-tab.new-tab-append {
 			visibility: hidden;
 		}
@@ -64,35 +70,72 @@
 			min-width: 15px;
 			width: 15px;
 			text-align: center;
+
+			&.new-tab-sticky {
+				right: 10px;
+			}
 		}
-		.tab.new-tab.new-tab-sticky {
-			right: 10px;
+
+		&.new-tab-left {
+			padding-left: 40px;
 		}
 	}
 }
+
 .theme-one-dark-ui,
 .theme-one-light-ui {
 	.tab-bar {
 		.tab.new-tab {
 			min-width: 40px;
 			width: 40px;
+
+			&.new-tab-prepend {
+				border-width: 0;
+			}
+		}
+
+		&.new-tab-left {
+			padding-left: 40px;
+
+			.tab:first-child {
+				border-width: 0 0 0 1px;
+			}
 		}
 	}
 }
+
 // https://atom.io/themes/atom-material-ui
-.tab-icons {
-	.theme-atom-material-ui {
-		.tab-bar {
-			.tab.new-tab {
-				text-align: center;
-				.title {
-					margin-top: 1px;
-					padding: 0;
-				}
+.theme-atom-material-ui {
+	.tab-bar {
+		.tab.new-tab {
+			text-align: center;
+
+			.title {
+				margin-top: 1px;
+				padding: 0;
 			}
-			.tab.new-tab.new-tab-sticky {
-				width: -webkit-fit-content;
-			}
+		}
+
+		&.new-tab-left {
+			padding-left: 40px;
+		}
+
+		.tab.new-tab.new-tab-sticky {
+			width: -webkit-fit-content;
+		}
+	}
+}
+
+// https://atom.io/themes/metro-ui
+.theme-metro-ui {
+	.tab-bar {
+		.tab.new-tab {
+			min-width: 40px;
+			width: 40px;
+		}
+
+		&.new-tab-left {
+			padding-left: 40px;
 		}
 	}
 }
