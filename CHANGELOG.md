@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.5.2
+
+*   :bug: Fix for One theme minimum mode. Fixes [#6](https://github.com/jerone/atom-new-tab/issues/6).
+
 ## v0.5.1
 
 *   :bug: Fix style issue with latest Atom Material UI theme.
